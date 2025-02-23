@@ -18,21 +18,24 @@ public class CartService {
     private final CartRepository cartRepository;
     private final BookRepository bookRepository;
     private final CartDetailRepository cartDetailRepository;
+    private final UserRepository userRepository;
 
     public CartService(UserService userService,
                        BookService bookService,
                        CartRepository cartRepository,
                        BookRepository bookRepository,
-                       CartDetailRepository cartDetailRepository) {
+                       CartDetailRepository cartDetailRepository,
+                       UserRepository userRepository) {
         this.userService = userService;
         this.bookService = bookService;
         this.cartRepository = cartRepository;
         this.bookRepository = bookRepository;
         this.cartDetailRepository = cartDetailRepository;
+        this.userRepository = userRepository;
     }
 
     public void addProductToCart(String userId, String bookId, int quantity) {
-        User user = userService.getUserById(userId);
+        User user = userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
 
         if (user != null) {
             Cart cart = cartRepository.findByUserId(userId);
