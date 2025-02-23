@@ -12,6 +12,7 @@ public enum ErrorCode {
 
 
     BOOK_EXISTED(1002, "Book existed!"),
+    USER_EXISTED(1002, "User existed!"),
     TITLE_INVALID(1003, "The title must be at least 3 characters!"),
     PRICE_INVALID(1003, "The price must be higher than 1000!")
 
