@@ -1,5 +1,6 @@
 package com.dang.book_shop.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,10 +25,12 @@ public class OrderDetail {
     @Column(name = "price")
     private int price;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
 
+//    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "book_id")
     private Book book;

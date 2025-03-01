@@ -5,7 +5,12 @@ server:
 
 spring:
   datasource:
-    url: "jdbc:mysql://localhost:3306/book_shop"
+    url: ${DBMS_CONNECTION:jdbc:mysql://localhost:3306/book_shop}
     driverClassName: "com.mysql.cj.jdbc.Driver"
-    username: root
-    password: 2503
+    username: ${DBMS_USERNAME:root}
+    password: ${DBMS_PASSWORD:2503}
+
+jwt:
+  signerKey: "srKBrMV4n6pjM4ADh/BiAlibiMpbA4SIafxLbNCINvP/8ZPEefKoX/4uwzhv52KW"
+  valid-duration: 3600 #seconds
+  refreshable-duration: 360000 #seconds

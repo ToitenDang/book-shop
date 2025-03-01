@@ -1,5 +1,6 @@
 package com.dang.book_shop.dto.request;
 
+import com.dang.book_shop.validator.DobConstraint;
 import jakarta.persistence.Column;
 import lombok.*;
 
@@ -13,6 +14,7 @@ public class UserUpdateRequest {
 
     private String fullName;
 
+    @DobConstraint(min = 16, message = "DOB_INVALID")
     private LocalDate dob;
 
     private String address;

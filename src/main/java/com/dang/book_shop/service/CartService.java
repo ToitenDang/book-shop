@@ -71,7 +71,6 @@ public class CartService {
 
     public Cart getCartByUserId(String userId) {
         return cartRepository.findByUserId(userId);
-
     }
 
     public void deleteCartItem(String cartId, String cartDetailId){
@@ -101,6 +100,13 @@ public class CartService {
 
         cartDetailRepository.save(cartDetail);
         cartRepository.save(cart);
+    }
+
+    public void clearCart(String cartId){
+        Cart cart = cartRepository.findById(cartId).orElseThrow(() -> new AppException(ErrorCode.CART_NOT_FOUND));
+        cartDetailRepository.deleteAllByCartId(cartId);
+        cart.getCartDetail().clear();
+        cartRepository.deleteById(cartId);
     }
 
 //    public CartDetail getCartDetail(String cartId, String bookId){

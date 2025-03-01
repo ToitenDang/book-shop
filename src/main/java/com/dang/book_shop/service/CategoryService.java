@@ -33,7 +33,7 @@ public class CategoryService {
         categoryRepository.deleteById(id);
     }
 
-    public Category udpateCategory(CategoryCreationRequest request, String cateId){
+    public Category updateCategory(CategoryCreationRequest request, String cateId){
         Category category = getCategoryById(cateId);
         category.setName(request.getName());
         return categoryRepository.save(category);
