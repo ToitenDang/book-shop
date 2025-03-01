@@ -30,26 +30,33 @@ public class BookController {
     public ApiResponse<Book> addBook(@RequestBody @Valid BookCreationRequest request){
         log.info("request: {}", request);
 
-        ApiResponse<Book> apiResponse = new ApiResponse<>();
-        apiResponse.setResult(bookService.addBook(request));
-        return apiResponse;
+//        ApiResponse<Book> apiResponse = new ApiResponse<>();
+//        apiResponse.setResult(bookService.addBook(request));
+        return ApiResponse.<Book>builder()
+                .result(bookService.addBook(request))
+                .build();
     }
 
     @PutMapping("/book/{bookId}")
     public ApiResponse<Book> updateBook( @PathVariable String bookId, @RequestBody BookUpdateRequest request){
-        ApiResponse<Book> apiResponse = new ApiResponse<>();
-        apiResponse.setMessage("Cập nhật thành công!");
-        apiResponse.setResult(bookService.updateBook(request, bookId));
-        return apiResponse;
+//        ApiResponse<Book> apiResponse = new ApiResponse<>();
+//        apiResponse.setMessage("Cập nhật thành công!");
+//        apiResponse.setResult(bookService.updateBook(request, bookId));
+        return ApiResponse.<Book>builder()
+                .message("Cập nhật thành công!")
+                .result(bookService.updateBook(request, bookId))
+                .build();
     }
 
 
     @GetMapping("/books")
     public ApiResponse<List<Book>> getBooks(){
 
-        ApiResponse<List<Book>> apiResponse = new ApiResponse<>();
-        apiResponse.setResult(bookService.getBooks());
-        return apiResponse;
+//        ApiResponse<List<Book>> apiResponse = new ApiResponse<>();
+//        apiResponse.setResult(bookService.getBooks());
+        return ApiResponse.<List<Book>>builder()
+                .result(bookService.getBooks())
+                .build();
     }
 
     @GetMapping("/books/{cateId}")

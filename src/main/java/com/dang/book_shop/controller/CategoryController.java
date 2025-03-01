@@ -16,18 +16,24 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @PostMapping("/category")
-    public Category createCategory(@RequestBody CategoryCreationRequest request) {
-        return categoryService.createCategory(request);
+    public ApiResponse<Category> createCategory(@RequestBody CategoryCreationRequest request) {
+        return ApiResponse.<Category>builder()
+                .result(categoryService.createCategory(request))
+                .build();
     }
 
     @GetMapping("/categories")
-    public List<Category> getCategories() {
-        return categoryService.getCategories();
+    public ApiResponse<List<Category>> getCategories() {
+        return ApiResponse.<List<Category>>builder()
+                .result(categoryService.getCategories())
+                .build();
     }
 
     @GetMapping("/category/{cateId}")
-    public Category getCategoryById(@PathVariable String cateId) {
-        return categoryService.getCategoryById(cateId);
+    public ApiResponse<Category> getCategoryById(@PathVariable String cateId) {
+        return ApiResponse.<Category>builder()
+                .result(categoryService.getCategoryById(cateId))
+                .build();
     }
 
     @DeleteMapping("/category/{cateId}")
@@ -37,8 +43,10 @@ public class CategoryController {
 
     @PutMapping("/categories/{cateId}")
     public ApiResponse<Category> updateCategory(@PathVariable String cateId, @RequestBody CategoryCreationRequest category){
-        ApiResponse<Category> apiResponse = new ApiResponse<>();
-        apiResponse.setResult(categoryService.udpateCategory(category, cateId));
-        return apiResponse;
+//        ApiResponse<Category> apiResponse = new ApiResponse<>();
+//        apiResponse.setResult(categoryService.updateCategory(category, cateId));
+        return ApiResponse.<Category>builder()
+                .result(categoryService.updateCategory(category, cateId))
+                .build();
     }
 }
