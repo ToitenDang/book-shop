@@ -26,6 +26,10 @@ public class BookCreationRequest {
     @Min(value = 1000, message = "PRICE_INVALID")
     private int price;
 
+    private int quantity;
+
+    private int sold;
+
     private String language;
 
     private String genre;

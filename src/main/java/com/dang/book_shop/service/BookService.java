@@ -8,9 +8,12 @@ import com.dang.book_shop.exception.AppException;
 import com.dang.book_shop.exception.ErrorCode;
 import com.dang.book_shop.repository.BookRepository;
 import com.dang.book_shop.repository.CategoryRepository;
+import com.dang.book_shop.service.upload.UploadImageFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +26,10 @@ public class BookService {
     @Autowired
     protected CategoryRepository categoryRepository;
 
-    public Book addBook(BookCreationRequest request) {
+    @Autowired
+    private UploadImageFile uploadImageFile;
+
+    public Book addBook(BookCreationRequest request, MultipartFile file) throws IOException {
         Category category = Optional.ofNullable(categoryRepository.getCategoryByName(request.getCategory()))
                 .orElseThrow(() -> new AppException(ErrorCode.CATEGORY_NOT_FOUND));
 
@@ -33,6 +39,7 @@ public class BookService {
 
         //request.setCategory(category);
         Book book = buildBook(request, category);
+        book.setImage(uploadImageFile.uploadImage(file));
 
         return bookRepository.save(book);
     }
@@ -44,6 +51,8 @@ public class BookService {
         book.setPublisher(request.getPublisher());
         book.setPublicationDate(request.getPublicationDate());
         book.setPrice(request.getPrice());
+        book.setQuantity(request.getQuantity());
+        book.setSold(request.getSold());
         book.setLanguage(request.getLanguage());
         book.setGenre(request.getGenre());
         book.setDescription(request.getDescription());
@@ -59,6 +68,8 @@ public class BookService {
         book.setPublisher(request.getPublisher());
         book.setPublicationDate(request.getPublicationDate());
         book.setPrice(request.getPrice());
+        book.setQuantity(request.getQuantity());
+        book.setSold(request.getSold());
         book.setLanguage(request.getLanguage());
         book.setGenre(request.getGenre());
         book.setDescription(request.getDescription());

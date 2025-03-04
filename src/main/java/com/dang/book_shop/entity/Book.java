@@ -37,6 +37,12 @@ public class Book {
     @Column(name = "price")
     private int price;
 
+    @Column(name = "quantity")
+    private int quantity;
+
+    @Column(name = "sold")
+    private int sold;
+
     @Column(name = "language")
     private String language;
 
@@ -45,6 +51,9 @@ public class Book {
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "image")
+    private String image;
 
     @ManyToOne()
     @JoinColumn(name = "category_id")

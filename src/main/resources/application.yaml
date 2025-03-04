@@ -10,7 +10,20 @@ spring:
     username: ${DBMS_USERNAME:root}
     password: ${DBMS_PASSWORD:2503}
 
+  servlet:
+    multipart:
+      max-file-size: 50MB # mặc định là 1MB
+      max-request-size: 50MB # mặc định là 10MB (dữ liệu form)
+
 jwt:
   signerKey: "srKBrMV4n6pjM4ADh/BiAlibiMpbA4SIafxLbNCINvP/8ZPEefKoX/4uwzhv52KW"
   valid-duration: 3600 #seconds
   refreshable-duration: 360000 #seconds
+
+
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
