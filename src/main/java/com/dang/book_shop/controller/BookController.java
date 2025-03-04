@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -27,13 +29,14 @@ public class BookController {
     private CartService cartService;
 
     @PostMapping("/book")
-    public ApiResponse<Book> addBook(@RequestBody @Valid BookCreationRequest request){
+    public ApiResponse<Book> addBook(@ModelAttribute @Valid BookCreationRequest request,
+                                     @RequestParam("file") MultipartFile file) throws IOException {
         log.info("request: {}", request);
 
 //        ApiResponse<Book> apiResponse = new ApiResponse<>();
 //        apiResponse.setResult(bookService.addBook(request));
         return ApiResponse.<Book>builder()
-                .result(bookService.addBook(request))
+                .result(bookService.addBook(request, file))
                 .build();
     }
 

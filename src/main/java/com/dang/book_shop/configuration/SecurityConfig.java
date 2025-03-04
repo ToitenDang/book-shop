@@ -29,7 +29,7 @@ public class SecurityConfig {
     @Autowired CustomJwtDecoder customJwtDecoder;
 
     private final String[] PUBLIC_POST_ENDPOINTS = {"/users/user",
-            "/auth/log-in", "/auth/introspect", "/auth/log-out", "/auth/refresh"
+            "/auth/log-in", "/auth/introspect", "/auth/log-out", "/auth/refresh", "/upload/image"
 
     };
     private final String[] PUBLIC_GET_ENDPOINTS = {"/books",

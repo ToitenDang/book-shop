@@ -19,13 +19,13 @@ public class GlobalExceptionHandler {
     private static  final String MIN_ATTRIBUTE = "min";
     private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler(Exception.class)
-    ResponseEntity<ApiResponse> handlingRuntimeException(Exception exception){
-        ApiResponse apiResponse = new ApiResponse();
-        apiResponse.setCode(ErrorCode.UNCATEGORIZED.getCode());
-        apiResponse.setMessage(ErrorCode.UNCATEGORIZED.getMessage());
-        return ResponseEntity.status(ErrorCode.UNCATEGORIZED.getStatusCode()).body(apiResponse);
-    }
+//    @ExceptionHandler(Exception.class)
+//    ResponseEntity<ApiResponse> handlingRuntimeException(Exception exception){
+//        ApiResponse apiResponse = new ApiResponse();
+//        apiResponse.setCode(ErrorCode.UNCATEGORIZED.getCode());
+//        apiResponse.setMessage(ErrorCode.UNCATEGORIZED.getMessage());
+//        return ResponseEntity.status(ErrorCode.UNCATEGORIZED.getStatusCode()).body(apiResponse);
+//    }
 
     @ExceptionHandler(AppException.class)
     ResponseEntity<ApiResponse> handlingAppException(AppException exception){

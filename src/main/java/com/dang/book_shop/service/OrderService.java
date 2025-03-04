@@ -75,13 +75,13 @@ public class OrderService {
                 orderDetailRepository.save(orderDetail);
 
                 // Cập nhật lại số lượng sách trong kho
-//                Book book = cartDetail.getBook();
-//                if (book.getQuantity() < cartDetail.getQuantity()) {
-//                    throw new RuntimeException("Insufficient stock for product: " + book.getName());
-//                }
-//                book.setQuantity(book.getQuantity() - cartDetail.getQuantity());
-//                book.setSold(book.getSold() + cartDetail.getQuantity());
-//                bookRepository.save(book);
+                Book book = cartDetail.getBook();
+                if (book.getQuantity() < cartDetail.getQuantity()) {
+                    throw new RuntimeException("Insufficient stock for product: " + book.getTitle());
+                }
+                book.setQuantity(book.getQuantity() - cartDetail.getQuantity());
+                book.setSold(book.getSold() + cartDetail.getQuantity());
+                bookRepository.save(book);
             }
 
 
