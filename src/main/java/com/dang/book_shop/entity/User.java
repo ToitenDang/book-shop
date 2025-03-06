@@ -43,6 +43,9 @@ public class User {
     @Column(name = "role")
     private Role role;
 
+    @Column(name = "state")
+    private String state;
+
 //    @OneToOne(mappedBy = "user")
 //    private Cart cart;
 

@@ -1,7 +1,9 @@
 package com.dang.book_shop.controller;
 
+import com.cloudinary.Api;
 import com.dang.book_shop.dto.request.UserCreationRequest;
 import com.dang.book_shop.dto.request.UserUpdateRequest;
+import com.dang.book_shop.dto.request.VerifyUserRequest;
 import com.dang.book_shop.dto.response.ApiResponse;
 import com.dang.book_shop.dto.response.UserResponse;
 import com.dang.book_shop.entity.User;
@@ -28,6 +30,14 @@ public class UserController {
         apiResponse.setResult(userService.createUser(request));
 
         return apiResponse;
+    }
+
+    @PostMapping("/user/verify")
+    public ApiResponse<String> verifyUser(@RequestBody VerifyUserRequest request){
+        boolean isVerified = userService.verifyUser(request.getEmail(), request.getOtp());
+        return (isVerified)
+                ? ApiResponse.<String>builder().code(1000).message("Tạo tài khoản thành công").build():
+                 ApiResponse.<String>builder().code(1001).message("Mã OTP không đúng!").build();
     }
 
     @PutMapping("/user/{userId}")
